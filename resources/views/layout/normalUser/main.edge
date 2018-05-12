@@ -41,6 +41,9 @@ body{
     left:12px;
     top:9px;
 }
+td.disabled{
+  background-color:red;
+}
 
   </style>
 </head>
@@ -102,10 +105,7 @@ body{
 <script type="text/javascript">
   $(function () {
 
-    var startDay = moment('2018-05-18');
-    var testD2 = moment('2018-07-02');
-
-
+    var MinStartDay = moment('2018-05-18');
     var minDate = moment().add(3,'days');
     var maxDate = moment("2018-06-19");    
     //限制只能選擇3天候
@@ -117,6 +117,9 @@ body{
       keepOpen: true,
       minDate: minDate,
       maxDate: maxDate,
+      disabledDates: [
+      moment("2018-06-18"),
+      ],
       icons: {
         up: "fa fa-chevron-circle-up",
         down: "fa fa-chevron-circle-down",
@@ -143,7 +146,8 @@ $("#store_id").change(function(){
     	$('#date1').datetimepicker('destroy');
         var disable_date =  [
           moment("2018-05-18"),
-          moment("2018-05-20"),        
+          moment("2018-05-20"),
+          moment("2018-06-19"),        
         ] 
     $('#date1').datetimepicker({
       format: 'YYYY-MM-DD',
@@ -152,8 +156,9 @@ $("#store_id").change(function(){
         sideBySide: true,
         keepOpen: true,
         minDate:  moment("2018-06-11"),
-        maxDate:  moment("2018-06-18"),     
+        maxDate:  moment("2018-06-19"),     
         //disabledDates: disable_date
+
         icons: {
         up: "fa fa-chevron-circle-up",
         down: "fa fa-chevron-circle-down",
@@ -167,6 +172,7 @@ $("#store_id").change(function(){
     	$('#date1').datetimepicker('destroy');
         var disable_date =  [
           moment("2018-06-15"),
+          moment("2018-06-19"),
         ] 
     $('#date1').datetimepicker({
       format: 'YYYY-MM-DD',
@@ -175,7 +181,7 @@ $("#store_id").change(function(){
         sideBySide: true,
         keepOpen: true,
         minDate:  moment("2018-06-10"),
-        maxDate:  moment("2018-06-18"),     
+        maxDate:  moment("2018-06-19"),     
         disabledDates: disable_date,
               icons: {
         up: "fa fa-chevron-circle-up",
@@ -187,23 +193,35 @@ $("#store_id").change(function(){
     $('#date1').datetimepicker('show');
   }
 
+  //選完店櫃後如果非特殊店櫃所渲染的月曆
   else{
+
     	$('#date1').datetimepicker('destroy');
-        var minDate = moment().add(3,'days');
+        var minDate;
+        var MinStartDay = moment('2018-05-18');      
+        var nowDate = moment();
+        if(nowDate < MinStartDay){
+          minDate = MinStartDay;
+        }else{
+          minDate = moment().add(3,'days');
+        }
       $('#date1').datetimepicker({
       format: 'YYYY-MM-DD',
-      locale: moment.locale('zh-cn'),
+        locale: moment.locale('zh-cn'),
         inline: true,
         sideBySide: true,
         keepOpen: true,
-        minDate: minDate, 
+        minDate: minDate,
         maxDate: maxDate,
-              icons: {
-        up: "fa fa-chevron-circle-up",
-        down: "fa fa-chevron-circle-down",
-        next: 'fa fa-chevron-circle-right',
-        previous: 'fa fa-chevron-circle-left'
-      }
+        disabledDates: [
+          moment("2018-06-19"),
+        ],
+        icons: {
+          up: "fa fa-chevron-circle-up",
+          down: "fa fa-chevron-circle-down",
+          next: 'fa fa-chevron-circle-right',
+          previous: 'fa fa-chevron-circle-left'
+        }
     });
     $('#date1').datetimepicker('show');
   }

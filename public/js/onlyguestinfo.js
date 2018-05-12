@@ -49,7 +49,7 @@ $(function () {
     //mapping 用來判斷同時段、日期、店櫃是否超過兩次
     function mapping(gueststoreid, guestdate, guesttime) {
         // console.log(store_status_arr[0].id,store_status_arr[0].date,store_status_arr[0].time);
-        console.log(gueststoreid, guestdate, guesttime)
+        // console.log(gueststoreid, guestdate, guesttime)
         var key2 = 0;
         for (var i = 0; i < store_len; i++) {
             if (store_status_arr[i].id == gueststoreid && store_status_arr[i].date == guestdate && store_status_arr[i].time == guesttime) {

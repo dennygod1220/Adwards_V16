@@ -40,15 +40,18 @@
       //    The function indicates that when playing a video (state=1),
       //    the player should play for six seconds and then stop.
       var done = false;
+      //讓影片自動重複撥放
       function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 6000);
-          done = true;
+      if (event.data === YT.PlayerState.ENDED) {
+            player.playVideo(); 
         }
+
       }
       function stopVideo() {
         player.stopVideo();
       }
+
+
     </script>
 
 @endsection 

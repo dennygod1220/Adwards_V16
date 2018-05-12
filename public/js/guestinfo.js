@@ -182,8 +182,9 @@ const size_select = new Vue({
         }
       }
       if(event.target.value == '其他尺寸'){
-        alert("『提醒您：本次體驗試穿之新品罩杯尺寸為 CD70-80;E70-75，如無法成功完成體驗試穿並填寫問券,恕無法享有免費送內衣!』");
+        // alert("『提醒您：本次體驗試穿之新品罩杯尺寸為 CD70-80;E70-75，如無法成功完成體驗試穿並填寫問券,恕無法享有免費送內衣!』");
         // window.location.replace("/");
+        $("#exampleModalCenter6").modal('show');  
       }
        return this.selectsize = event.target.value;
       

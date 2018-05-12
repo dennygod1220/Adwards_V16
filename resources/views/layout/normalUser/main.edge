@@ -225,7 +225,14 @@ $("#store_id").change(function(){
   }
 })
 
-
+$(window).resize(function () {
+  const wdth = $(window).width();
+  if (wdth < 450) {
+      $("#audreyLogo").css("max-height", "70px")
+  }else{
+    $("#audreyLogo").css("max-height", "124px")
+  }
+})
 
 });
 

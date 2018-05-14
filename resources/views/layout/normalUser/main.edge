@@ -224,7 +224,12 @@ $("#store_id").change(function(){
     $('#date1').datetimepicker('show');
   }
 })
-
+var wdth = $(window).width();
+  if (wdth < 450) {
+      $("#audreyLogo").css("max-height", "70px")
+  }else{
+    $("#audreyLogo").css("max-height", "124px")
+  }
 $(window).resize(function () {
   const wdth = $(window).width();
   if (wdth < 450) {

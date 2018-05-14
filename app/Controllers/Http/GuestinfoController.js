@@ -1,5 +1,7 @@
 'use strict'
 
+
+
 const gestmodel = use('App/Models/Guestinfo')
 const storemodel = use('App/Models/StoreInfo')
 const Database = use('Database')

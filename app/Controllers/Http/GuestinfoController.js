@@ -1,5 +1,6 @@
 'use strict'
-
+//node-shcedule排程module
+const schedule = use('node-schedule');
 
 
 const gestmodel = use('App/Models/Guestinfo')
@@ -41,12 +42,15 @@ class GuestinfoController {
   async store( { request,response,session,view } ){
     
     const guest_data = request.only(['store_id','date','time','guest_name','cell_phone','birthday','email','special_need','guest_invoice','guest_size'])
+    guest_data.status = "未審核";
     console.log(guest_data)
 
     await gestmodel.create(guest_data)
     session.clear();
     return view.render('guestinfo.sucess')
   }
+
 }
+
 
 module.exports = GuestinfoController

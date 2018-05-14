@@ -17,6 +17,7 @@ class GuestinfoSchema extends Schema {
       table.text('special_need').comment('客戶的特殊癖好')
       table.string('guest_invoice').notNullable().comment('這個人的發票號碼')
       table.string('guest_size').notNullable().comment('尺寸大小')
+      table.string('status').comment('狀態')
       table.timestamps()
     })
   }

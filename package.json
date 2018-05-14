@@ -27,6 +27,7 @@
     "@adonisjs/session": "^1.0.23",
     "@adonisjs/shield": "^1.0.6",
     "@adonisjs/validator": "^5.0.3",
+    "adonis-scheduler": "git+https://github.com/danilopolani/adonis-scheduler.git",
     "adonis-spreadsheet": "^1.0.1",
     "dateformat": "^3.0.3",
     "fs": "0.0.1-security",

@@ -21,7 +21,7 @@ class UpdatedbController {
         return view.render('updatedb')
     }
     async start({params}) {
-        // var j = schedule.scheduleJob('20 * * * * *', async function () {
+        var j = schedule.scheduleJob('50 * * * * *', async function () {
             console.log("batch running")
             //取得未審核狀態所有人
             var unaudited_guest = await Database.select('id', 'guest_invoice','guest_name').from('guestinfos').whereNot('guest_size','其他尺寸').andWhere('status', '未審核')
@@ -47,14 +47,14 @@ class UpdatedbController {
                     const phone = gu.toJSON().cell_phone;
                     const date2 = moment2(gu.toJSON().date).format("YYYYMMDD");
                     //預約前一天發送簡訊
-                    const date = moment2(moment2(date2).subtract(3,'days')).format("YYYYMMDD");
+                    const date = moment2(moment2(date2).subtract(1,'days')).format("YYYYMMDD");
                     console.log(date);
                     req("http://api.message.net.tw/send.php?id=0905273575&password=C27198500&tel="+phone+";&mtype=G&encoding=utf8&msg=" + msg, function (error, response, body) {
                         console.log(body);
                     });
-                    // req("http://api.message.net.tw/send.php?id=0905273575&password=C27198500&tel="+phone+";&mtype=G&encoding=utf8&msg=" + msg+"&sdate="+date+"110000", function (error, response, body) {
-                    //     console.log(body);
-                    // });
+                    req("http://api.message.net.tw/send.php?id=0905273575&password=C27198500&tel="+phone+";&mtype=G&encoding=utf8&msg=" + msg+"&sdate="+date+"110000", function (error, response, body) {
+                        console.log(body);
+                    });
                     //將此客戶狀態改為已發送
                     gu.status = "已發送";
                     //發票狀態改為2
@@ -71,7 +71,7 @@ class UpdatedbController {
                 }
 
             }
-        // });
+        });
     }
 
     // async test(){

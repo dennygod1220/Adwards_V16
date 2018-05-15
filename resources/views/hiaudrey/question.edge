@@ -41,7 +41,7 @@
         <div class="form-group row">
         <label for="staticEmail" class="col-form-label">櫃號:</label>
         <div class="col">
-            <input type="text" name="qu_store_num" class="form-control">
+            <input type="text" name="qu_store_num" class="form-control" id="real_store_num" readonly>
         </div>
         </div>
       </div>
@@ -50,7 +50,12 @@
         <div class="form-group row">
         <label for="staticEmail" class="col-form-label">櫃名:</label>
         <div class="col">
-            <input type="text" name="qu_store_name" class="form-control">
+            <select id="store_name_in" class="form-control">
+              @each(item in store_data)
+              <option value="{{item.store_num}}">{{item.store_name}}</option>
+              @endeach
+            </select>
+            <input type="text" name="qu_store_name" class="form-control" id="real_store_name" style="display:none">
         </div>
         </div>
       </div>
@@ -413,5 +418,13 @@
 {{ script('https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js')}}
 {{ script('https://cdn.jsdelivr.net/npm/vue/dist/vue.js')}}
 {{ script('../js/question.js') }}
+
+<script>
+  $("#store_name_in").change(function(){
+    var txt = $('#store_name_in :selected').text();
+    $("#real_store_name").val(txt);
+    $("#real_store_num").val($("#store_name_in").val())
+  })
+</script>
 @endsection
 

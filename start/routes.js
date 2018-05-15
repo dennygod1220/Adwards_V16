@@ -79,12 +79,10 @@ Route.get('/AudreySP/question/delete/:id', 'QuestionController.delete').middlewa
 Route.on('/AudreySP/errorpage').render('error.404')
 
 //更新資料庫
-Route.get('/AudreySP/updatedb','UpdatedbController.index')
-Route.get('/AudreySP/updatedbstart/:id','UpdatedbController.start')
-Route.get('/AudreySP/updatedbcancel','UpdatedbController.cancel')
+Route.get('/AudreySP/updatedb','UpdatedbController.index').middleware('auth')
 
 //下載測試
-Route.get('/downloadQu','QuestionController.downloadguestinfo')
+Route.get('/AudreySP/downloadQu','QuestionController.downloadguestinfo')
 
 // Route.get('/report', async({request, response, next})=> {
 

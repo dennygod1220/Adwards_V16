@@ -2,6 +2,9 @@
 const questionM = use('App/Models/Questionnaire')
 const moment2 = use('moment')
 const XlsxPopulate = use('xlsx-populate')
+const storemodel = use('App/Models/StoreInfo')
+const Database = use('Database')
+
 class QuestionController {
     async index({ view,session }){
         const question_data = await questionM.all();
@@ -17,7 +20,11 @@ class QuestionController {
         })
     }
     async writequestion({ view,session }){
+        const store_info = await Database.select('store_num','store_name').from('store_infos')
+        // const store_data = store_info.toJSON();
+
         return view.render('hiaudrey.question',{
+            store_data:store_info,
             SessionUser:session.get('username')+"你好"
         })
     }

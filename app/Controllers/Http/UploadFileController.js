@@ -30,7 +30,6 @@ class UploadFileController {
       // types: [''],
       // size: '2mb'
     })
-
     //取得目前時間和上傳檔案名稱組合為 server中儲存的檔案名稱
     const filename = dateFormat(now, "yyyymmdd_hhMMss_") + profilePic.clientName;
 
@@ -41,6 +40,7 @@ class UploadFileController {
     if (!profilePic.moved()) {
       return profilePic.error()
     }
+
     //組合路徑
     const newfilename = 'public/uploads/'+filename
 
@@ -59,6 +59,7 @@ class UploadFileController {
       const myobj = {"invoice_num":element,"file_name":filename,"invoice_status":1}
       arr.push(myobj)
     });
+
     //createMany 可以一次建立多筆資料 建立的格式為 [{col_name:data1},{col_name:data2},.....]
     await AdonisInvoice.createMany(arr)
 

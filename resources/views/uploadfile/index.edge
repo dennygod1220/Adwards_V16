@@ -3,7 +3,8 @@
  @section('content')
 
 
-<form method="POST" action="upload" enctype="multipart/form-data">
+<form method="POST" action="/AudreySP/upload" enctype="multipart/form-data">
+          {{ csrfField() }}
   <div class="form-group">
     <label>請選擇要上傳的檔案</label>
     <input class="form-control-file" type="file" name="profile_pic" />

@@ -41,9 +41,15 @@ class GuestinfoController {
 
 
   async store( { request,response,session,view } ){
-    const guest_data = request.only(['store_id','date','time','guest_name','cell_phone','birthday','email','special_need','guest_invoice','guest_size'])
-    guest_data.status = "未審核";
+    const guest_data = request.only(['store_id','date','time','guest_name','cell_phone','birthday','email','guest_invoice','guest_size'])
+
     console.log(guest_data)
+    if(guest_data.guest_size == "其他尺寸"){
+      guest_data.status = "尺寸不符";
+    }
+    else{
+      guest_data.status = "未審核";
+    }
     //將客戶資料存進table中
     await gestmodel.create(guest_data)
 

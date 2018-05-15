@@ -9,7 +9,7 @@ Route.on('/AudreySP').render('awardsindex.index')
 //20180421_因不須跳到別的頁面輸入發票號碼，因此直接從'/'發送post請求到invoiceok頁面
 // Route.on('/reservationnow').render('awardsindex.reservationnow')
 Route.post('/AudreySP','AwardsIndexController.check').validator('invoicecheck')
-
+// Route.post('/AudreySP',async ({ params }) => {return "hello"})
 //填個人資料，發票符合資格才能到達此頁
 //0509不擋發票了，所以拿掉middleware
 // Route.get('/invoiceok','GuestinfoController.invoiceok').middleware(['Checkinvoice'])
@@ -65,7 +65,7 @@ Route.post('/AudreySP/createguest','CreateguestinfoController.store').middleware
 //奧黛莉他們上傳用的路徑
 Route.get('/AudreySP/uploadfile','UploadFileController.index').middleware('auth')
 
-Route.post('/AudreySP/upload', 'UploadFileController.store')
+Route.post('/AudreySP/upload', 'UploadFileController.store').middleware('auth')
 
 //問卷調查
 Route.get('/AudreySP/question','QuestionController.index').middleware('auth')

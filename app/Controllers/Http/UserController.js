@@ -12,7 +12,7 @@ class UserController {
 
         await auth.login(user);
 
-        return response.redirect('/')
+        return response.redirect('/AudreySP')
     }
     
     async signIn( { request ,response , auth, session } ){
@@ -32,7 +32,7 @@ class UserController {
             //將這個測試使用者放入session
             session.put('username',usename1)
             
-            return response.route('/HiAudrey', {email: email}) 
+            return response.route('/AudreySP/HiAudrey', {email: email}) 
         }
         catch(error){
             console.log(error)

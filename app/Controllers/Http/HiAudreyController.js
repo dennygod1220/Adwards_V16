@@ -30,7 +30,7 @@ class HiAudreyController {
             const delMem = await Guestinfo.find(params.id)
             await delMem.delete()
             session.flash({ notification:'刪除成功' })
-            return response.redirect('/HiAudrey')
+            return response.redirect('/AudreySP/HiAudrey')
             
         }
 

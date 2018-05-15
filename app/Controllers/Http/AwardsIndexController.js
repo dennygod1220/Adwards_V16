@@ -13,7 +13,7 @@ class AwardsIndexController {
         const data2 = data.toJSON();
         const {email,invoice_num} = request.all();
         session.put('invoicenum',invoice_num )
-        return response.route('/invoiceok') 
+        return response.route('/AudreySP/invoiceok') 
     }
 }
 

@@ -41,7 +41,7 @@ class CreateguestinfoController {
 
         await gestmodel.create(guest_data)
         session.flash({addsucess:"新增成功"})
-        return response.redirect('/HiAudrey')
+        return response.redirect('/AudreySP/HiAudrey')
       }
 }
 

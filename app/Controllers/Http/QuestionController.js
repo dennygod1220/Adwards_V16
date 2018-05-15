@@ -57,7 +57,7 @@ class QuestionController {
         session.flash({
           addsucess: "新增成功"
         })
-        return response.redirect('/question')
+        return response.redirect('/AudreySP/question')
 
     }
 
@@ -66,7 +66,7 @@ class QuestionController {
             const delMem = await questionM.find(params.id)
             await delMem.delete()
             session.flash({ notification:'刪除成功' })
-            return response.redirect('/question')
+            return response.redirect('/AudreySP/question')
             
         }
 

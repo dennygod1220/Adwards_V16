@@ -56,7 +56,7 @@ class UploadFileController {
 
     //取出excel資料後 將資料組成物件 push進陣列 
     excelObj.forEach(element => {
-      const myobj = {"invoice_num":element,"file_name":filename}
+      const myobj = {"invoice_num":element,"file_name":filename,"invoice_status":1}
       arr.push(myobj)
     });
     //createMany 可以一次建立多筆資料 建立的格式為 [{col_name:data1},{col_name:data2},.....]

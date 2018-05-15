@@ -8,7 +8,7 @@ class AdonisInvoiceSchema extends Schema {
       table.increments()
       table.string('invoice_num').notNullable()
       table.string('file_name')
-      table.integer('user_id')
+      table.integer('invoice_status').comment('發票狀態')
       table.timestamps()
     })
 

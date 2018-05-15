@@ -4,35 +4,35 @@ const Route = use('Route')
 const Helpers = use('Helpers')
 
 //首頁
-Route.on('/').render('awardsindex.index')
+Route.on('/AudreySP').render('awardsindex.index')
 
 //20180421_因不須跳到別的頁面輸入發票號碼，因此直接從'/'發送post請求到invoiceok頁面
 // Route.on('/reservationnow').render('awardsindex.reservationnow')
-Route.post('/','AwardsIndexController.check').validator('invoicecheck')
+Route.post('/AudreySP','AwardsIndexController.check').validator('invoicecheck')
 
 //填個人資料，發票符合資格才能到達此頁
 //0509不擋發票了，所以拿掉middleware
 // Route.get('/invoiceok','GuestinfoController.invoiceok').middleware(['Checkinvoice'])
-Route.get('/invoiceok','GuestinfoController.invoiceok')
+Route.get('/AudreySP/invoiceok','GuestinfoController.invoiceok')
 
-Route.post('/invoiceok','GuestinfoController.store').validator('guestinfo') 
+Route.post('/AudreySP/invoiceok','GuestinfoController.store').validator('guestinfo') 
 // Route.post('/invoiceok','GuestinfoController.store') 
   
 
 //預約試穿
-Route.on('/testdress').render('testdress')
+Route.on('/AudreySP/testdress').render('testdress')
 //內衣密碼
-Route.on('/underwearsecrect1').render('underwearsecrect/1')
-Route.on('/underwearsecrect2').render('underwearsecrect/2')
-Route.on('/underwearsecrect3').render('underwearsecrect/3')
-Route.on('/underwearsecrect4').render('underwearsecrect/4')
+Route.on('/AudreySP/underwearsecrect1').render('underwearsecrect/1')
+Route.on('/AudreySP/underwearsecrect2').render('underwearsecrect/2')
+Route.on('/AudreySP/underwearsecrect3').render('underwearsecrect/3')
+Route.on('/AudreySP/underwearsecrect4').render('underwearsecrect/4')
 
 //門市活動
-Route.on('/storeactive').render('storeactive')
+Route.on('/AudreySP/storeactive').render('storeactive')
 //新品介紹
-Route.on('/newproduct').render('newproduct')
+Route.on('/AudreySP/newproduct').render('newproduct')
 //影片欣賞
-Route.on('/watchVideo').render('watchVideo')
+Route.on('/AudreySP/watchVideo').render('watchVideo')
 
 //===============================================後台====================================
 //===============使用者驗證相關(給奧黛莉上傳檔案用驗證)=================
@@ -52,32 +52,36 @@ Route.group(()=>{
     Route.on('/signin').render('auth.sign-in')
     
     Route.post('/signin','UserController.signIn').validator('SignIn')
-}).prefix('/auth')
+}).prefix('/AudreySP/auth')
 
 //後台首頁
-Route.get('/HiAudrey','HiAudreyController.index').middleware('auth')
+Route.get('/AudreySP/HiAudrey','HiAudreyController.index').middleware('auth')
 //刪除客戶資料
-Route.get('/HiAudrey/delete/:id', 'HiAudreyController.delete').middleware('auth')
+Route.get('/AudreySP/HiAudrey/delete/:id', 'HiAudreyController.delete').middleware('auth')
 //手動新增客戶資料
-Route.get('/createguest','CreateguestinfoController.index').middleware('auth')
+Route.get('/AudreySP/createguest','CreateguestinfoController.index').middleware('auth')
 
-Route.post('/createguest','CreateguestinfoController.store').middleware('auth')
+Route.post('/AudreySP/createguest','CreateguestinfoController.store').middleware('auth')
 //奧黛莉他們上傳用的路徑
-Route.get('/uploadfile','UploadFileController.index').middleware('auth')
+Route.get('/AudreySP/uploadfile','UploadFileController.index').middleware('auth')
 
-Route.post('upload', 'UploadFileController.store')
+Route.post('/AudreySP/upload', 'UploadFileController.store')
 
 //問卷調查
-Route.get('/question','QuestionController.index').middleware('auth')
-Route.get('/writequestion','QuestionController.writequestion')
+Route.get('/AudreySP/question','QuestionController.index').middleware('auth')
+Route.get('/AudreySP/writequestion','QuestionController.writequestion')
 //新增問卷
-Route.post('writequestion', 'QuestionController.store').middleware('auth')
+Route.post('/AudreySP/writequestion', 'QuestionController.store').middleware('auth')
 //刪除問卷
-Route.get('/question/delete/:id', 'QuestionController.delete').middleware('auth')
+Route.get('/AudreySP/question/delete/:id', 'QuestionController.delete').middleware('auth')
 
 //錯誤頁面
-Route.on('/errorpage').render('error.404')
+Route.on('/AudreySP/errorpage').render('error.404')
 
+//更新資料庫
+Route.get('/AudreySP/updatedb','UpdatedbController.index')
+Route.get('/AudreySP/updatedbstart/:id','UpdatedbController.start')
+Route.get('/AudreySP/updatedbcancel','UpdatedbController.cancel')
 
 //下載測試
 Route.get('/downloadQu','QuestionController.downloadguestinfo')
@@ -89,4 +93,4 @@ Route.get('/downloadQu','QuestionController.downloadguestinfo')
 
 // });
 
-   
+

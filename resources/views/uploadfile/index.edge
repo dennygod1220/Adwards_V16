@@ -20,6 +20,7 @@
     <tr>
       <th scope="col">ID</th>
       <th scope="col">發票號碼</th>
+      <th scope="col">發票狀態,1=未兌換,2=已兌換</th>      
       <th scope="col">來自檔案</th>
     </tr>
   </thead>
@@ -28,6 +29,7 @@
     <tr>
       <td>{{ADB_data_all.id}}</td>
       <td>{{ADB_data_all.invoice_num}}</td>
+      <td>{{ADB_data_all.invoice_status}}</td>      
       <td>{{ADB_data_all.file_name}}</td>
     </tr>
     @endeach

@@ -1,4 +1,4 @@
- @layout('layout/normalUser/main')
+ @layout('layout/normalUser/main2')
   @section('content')
 <div class="row no-gutters">
 <div class="col">
@@ -202,7 +202,14 @@
               {{-- =================================== --}}
             </div>
 
-            <input type="text" name="guest_invoice">
+
+              <div class="form-group">
+              <label>
+                <span class="isneedicon">*</span>發票號碼:</label>
+                <input type="text" name="guest_invoice" class="form-control">
+
+              {{-- =================================== --}}
+            </div>
           </div>
         </div>
       </div>

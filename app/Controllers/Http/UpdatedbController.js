@@ -21,7 +21,7 @@ class UpdatedbController {
         return view.render('updatedb')
     }
     async start({params}) {
-        var j = schedule.scheduleJob('50 * * * * *', async function () {
+        var j = schedule.scheduleJob('* 30 * * * *', async function () {
             console.log("batch running")
             //取得未審核狀態所有人
             var unaudited_guest = await Database.select('id', 'guest_invoice','guest_name','status').from('guestinfos').whereNot('guest_size','其他尺寸').andWhere('status', '未審核').orWhere('status','不符合');

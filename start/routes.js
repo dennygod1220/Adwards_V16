@@ -45,7 +45,7 @@ Route.group(()=>{
 //==============登出===============================
     Route.get('/logout',async({ auth,response }) =>{
         await auth.logout();
-        return response.redirect('/');
+        return response.redirect('/AudreySP');
     } )
 //================登入=================================
     
@@ -80,9 +80,13 @@ Route.on('/AudreySP/errorpage').render('error.404')
 
 //更新資料庫
 Route.get('/AudreySP/updatedb','UpdatedbController.index').middleware('auth')
+Route.get('/AudreySP/updatedbstart/:id','UpdatedbController.start')
+Route.get('/AudreySP/updatedbcancel','UpdatedbController.cancel')
 
-//下載測試
+//下載問卷
 Route.get('/AudreySP/downloadQu','QuestionController.downloadguestinfo')
+//下載客戶資料
+Route.get('/AudreySP/downloadGu','HiAudreyController.downloadguestinfo')
 
 // Route.get('/report', async({request, response, next})=> {
 

@@ -2,6 +2,7 @@
 const Guestinfo = use('App/Models/Guestinfo')
 const moment2 = use('moment')
 const XlsxPopulate = use('xlsx-populate')
+const Database = use('Database')
 class HiAudreyController {
     async index({ view,session }){
 
@@ -39,12 +40,12 @@ class HiAudreyController {
             var hello = await XlsxPopulate.fromBlankAsync()
               .then(async workbook => {
 
-                const r = workbook.sheet(0).range("A1:K1");
+                const r = workbook.sheet(0).range("A1:L1");
                 r.value([
-                  ["店櫃", "預約日期", "預約時間", "姓名", "電話", "生日", "Email", "特殊需求", "發票號碼", "尺寸", "建立時間"],
-                  ["店櫃", "預約日期", "預約時間", "姓名", "電話", "生日", "Email", "特殊需求", "發票號碼", "尺寸", "建立時間"],
+                  ["店櫃", "預約日期", "預約時間", "姓名", "電話", "生日", "Email", "狀態", "驗證碼" ,"發票號碼", "尺寸", "建立時間"],
+                  ["店櫃", "預約日期", "預約時間", "姓名", "電話", "生日", "Email", "狀態", "驗證碼" ,"發票號碼", "尺寸", "建立時間"],
                 ]);
-                workbook.sheet(0).range("A1:K1").style({
+                workbook.sheet(0).range("A1:L1").style({
                   fontColor: "ffffff",
                   fill: "272727",
                   horizontalAlignment: 'center'
@@ -55,36 +56,42 @@ class HiAudreyController {
                   .query()
                   .with('StoreInfo')
                   .fetch()
-                const guestdata = all_guestinfo.toJSON()
-
-                const newrange = "A2:K"+ (guestdata.length+2);
-
-                const r2 = workbook.sheet(0).range(newrange);
-                //外層陣列
-                var arr = [];
-                //內層
-                var arr2 =[];
-                var arr3 =[];
-                //資料筆數
-                for (let i = 0; i < guestdata.length; i++) {
+                var guestdata2 = all_guestinfo.toJSON()
+                var guestdata = await Database.select('store_id','date','time','guest_name','cell_phone','birthday','email','status','validator_num','guest_invoice','guest_size','created_at').from('guestinfos');
+                // console.log(guestdata2);
+                // console.log(guestdata[0]);
+                
+                // console.log(guestdata[15].StoreInfo.store_name)
+                // var guestdata2 = [];
+                // for(var x=0;x<guestdata.length;x++){
+                //   guestdata2[x] = await Database.select('store_name').from('store_infos').where('id',guestdata[x].store_id);
+                // }
+                // r.value([ [1,2,3],[1,2,3] ])
+                for(var i=0;i<guestdata.length;i++){
                   guestdata[i].date = moment2(guestdata[i].date).format("YYYY-MM-DD");
-                  guestdata[i].birthday = moment2(guestdata[i].birthday).format("YYYY-MM-DD");
-                  for(let j = 0;j<11;j++){
-                    if(j=0)
-                    arr2[i][j] = guestdata[i].StoreInfo.store_name;
-                    else if(j=1)
-                    arr2[i][j] = guestdata[i].date;
-                    
-                  }
+                  guestdata[i].birthday = moment2(guestdata[i].birthday).format("YYYY-MM-DD"); 
+                  guestdata[i].created_at = moment2(guestdata[i].created_at).format("YYYY-MM-DD hh:mm:ss");                  
+                                   
+                  workbook.sheet("Sheet1").cell("A"+(i+2)).value(guestdata2[i].StoreInfo.store_name);
+                  workbook.sheet("Sheet1").cell("B"+(i+2)).value(guestdata[i].date); 
+                  workbook.sheet("Sheet1").cell("C"+(i+2)).value(guestdata[i].time);                  
+                  workbook.sheet("Sheet1").cell("D"+(i+2)).value(guestdata[i].guest_name);                  
+                  workbook.sheet("Sheet1").cell("E"+(i+2)).value(guestdata[i].cell_phone);                  
+                  workbook.sheet("Sheet1").cell("F"+(i+2)).value(guestdata[i].birthday);                  
+                  workbook.sheet("Sheet1").cell("G"+(i+2)).value(guestdata[i].email);                  
+                  workbook.sheet("Sheet1").cell("H"+(i+2)).value(guestdata[i].status);                  
+                  workbook.sheet("Sheet1").cell("I"+(i+2)).value(guestdata[i].validator_num);                  
+                  workbook.sheet("Sheet1").cell("J"+(i+2)).value(guestdata[i].guest_invoice);                  
+                  workbook.sheet("Sheet1").cell("K"+(i+2)).value(guestdata[i].guest_size);                  
+                  workbook.sheet("Sheet1").cell("L"+(i+2)).value(guestdata[i].created_at);                      
                 }
-                r2.value(arr2)
-
+                
                 //建立此excel檔案到server
                 // Write to file.
-                return workbook.toFileAsync("./public/download/book.xlsx");
+                return workbook.toFileAsync("./public/download/guestinfo.xlsx");
               });
 
-            return await response.attachment('./public/download/book.xlsx', 'Hello.xlsx');
+            return await response.attachment('./public/download/guestinfo.xlsx', 'Hello.xlsx');
 
           }
 

@@ -117,6 +117,9 @@ $(function () {
     $("#submitbtn").click(function () {
         document.forms[1].submit();
     })
+    $("#submitbtn2").click(function () {
+        document.forms[1].submit();
+    })
 //================當客人點擊 確認預約按鈕時  做一個基本的資料都有填寫確認 ，若是資歷都填完了就會跳出 隱私權同意
     $("#confirm1").click(function(){
         var inStore = $("#store_id :selected").text();

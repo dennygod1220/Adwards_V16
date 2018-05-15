@@ -38,26 +38,7 @@ class QuestionController {
           'qu_test_size',
           'qu_size',
           'qu_1_1_1',
-          'qu_1_1_2',
-          'qu_1_1_3',
-          'qu_1_2_1',
-          'qu_1_2_2',
-          'qu_1_2_3',
-          'qu_1_3_1',
-          'qu_1_3_2',
-          'qu_1_3_3',
-          'qu_2_1',
-          'qu_2_2',
-          'qu_2_3',
-          'qu_2_4',
-          'qu_2_5',
-          'qu_2_6',
-          'qu_2_7',
-          'qu_2_7_2',
-          'qu_2_8',
-          'qu_award_num',
-          'qu_service_name',
-          'qu_award_name'
+          'qu_2_1'
         ])
 
         await questionM.create(guest_data)
@@ -84,9 +65,9 @@ class QuestionController {
 
               const r = workbook.sheet(0).range("B1:AA1");
               r.value([
-                ["櫃號", "櫃名", "試穿日期", "試穿尺寸", "尺碼", "上胸圍", "下胸圍", "罩杯", "腰圍", "臀圍", "建議穿著內衣尺寸","A=上胸圍/腰圍","B=臀圍/腰圍","身型密碼","您曾經穿過Audrey魔塑W弦內衣嗎","您知道Audrey魔塑W弦內衣是台灣奧黛莉公司所擁有多國專利的商品嗎?","選購內衣時，吸引您的功能特點是什麼","您認為Audrey魔塑W弦內衣穿起來最令您滿意的地方","未來Audrey魔塑W弦內衣推出新款時, 您會喜歡什麼花色","您重視的內衣材質","您喜歡Audrey魔塑W弦內衣罩杯前中心鏤空的穿著效果嗎","原因","您會推薦誰體驗or購買Audrey魔塑W弦內衣","兌換貨號","服務員簽名","兌換者簽名"],
+                ["櫃號", "櫃名", "試穿日期", "試穿尺寸", "尺碼", "未完成原因", "是否完成"],
               ]);
-              workbook.sheet(0).range("B1:AA1").style({
+              workbook.sheet(0).range("B1:I1").style({
                 fontColor: "ffffff",
                 fill: "272727",
                 horizontalAlignment: 'center'
@@ -94,7 +75,8 @@ class QuestionController {
 
               //===================抓資料
               const question_data = await questionM.all();
-              const question_data2 = question_data.toJSON();
+            //   const question_data2 = question_data.toJSON();
+             const question_data2 = await Database.select('qu_store_num','qu_store_name','qu_test_date','qu_test_size','qu_size','qu_1_1_1','qu_2_1').from('questionnaires');
       
               for(let i=0;i<question_data2.length;i++){
                   question_data2[i].qu_test_date = moment2(question_data2[i].qu_test_date).format("YYYY-MM-DD");
@@ -105,7 +87,7 @@ class QuestionController {
               var arr2 =[];
               var rr = [];
               for(let i =0;i<datacount;i++){
-                rr[i] =  workbook.sheet(0).range("B"+(i+2)+":AA"+(i+2));
+                rr[i] =  workbook.sheet(0).range("B"+(i+2)+":I"+(i+2));
 
                   var qus = question_data2[i];
                   for(var ob in qus){

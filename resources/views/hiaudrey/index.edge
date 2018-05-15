@@ -2,6 +2,7 @@
 @layout('layout/auth/main')
  @section('content')
 
+
 <div style="height:38px;background-color:#212529;">
 @if(old('notification'))
     <div class="alert alert-danger">
@@ -20,7 +21,9 @@
 @endif
 </div>
 
-<table class="table table-bordered table-hover " style="text-align:center;">
+<a href="/AudreySP/downloadGu" class="btn btn-outline-info">下載</a>
+
+<table class="table table-bordered table-hover " style="text-align:center;" id="tbl">
   <thead class="thead-dark">
     <tr>
     <th scope="col">店櫃</th>
@@ -59,4 +62,7 @@
     @endeach
   </tbody>
 </table>
+
+
+
 @endsection

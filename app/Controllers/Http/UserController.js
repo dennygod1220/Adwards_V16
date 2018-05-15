@@ -11,8 +11,8 @@ class UserController {
 
 
         await auth.login(user);
-
-        return response.redirect('/AudreySP')
+        // await auth.logout();
+        return response.redirect('/AudreySP/auth/signup')
     }
     
     async signIn( { request ,response , auth, session } ){

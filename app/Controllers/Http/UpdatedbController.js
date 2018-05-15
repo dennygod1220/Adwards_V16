@@ -24,7 +24,7 @@ class UpdatedbController {
         var j = schedule.scheduleJob('50 * * * * *', async function () {
             console.log("batch running")
             //取得未審核狀態所有人
-            var unaudited_guest = await Database.select('id', 'guest_invoice','guest_name').from('guestinfos').whereNot('guest_size','其他尺寸').andWhere('status', '未審核')
+            var unaudited_guest = await Database.select('id', 'guest_invoice','guest_name','status').from('guestinfos').whereNot('guest_size','其他尺寸').andWhere('status', '未審核').orWhere('status','不符合');
             // console.log(unaudited_guest);
             var arr1 = [];
 
@@ -42,19 +42,29 @@ class UpdatedbController {
                     const gu = await gestmodel.find(unaudited_guest[i].id);
                     const inv = await Awards.find(arr1[i][0].id);
                     //發送簡訊
-                    const gu_name = gu.toJSON().guest_name;s
+                    const gu_name = gu.toJSON().guest_name;
                     const phone = gu.toJSON().cell_phone;
                     const date2 = moment2(gu.toJSON().date).format("YYYYMMDD");
+                    const time = gu.toJSON().time;
                     const validatornum = gu.toJSON().validator_num;
-                    const org_msg = "奧黛莉提醒:"+gu_name;
-                    const msg = utf8.encode(gu_name);
+                    const storeid = gu.toJSON().store_id;
+                    const storename2 = await Database.select('store_name').from('store_infos').where('id',storeid);
+                    const storename = storename2[0].store_name;
+                    // console.log(storename)
+                    const org_msg1 = "感謝您預約『Audrey愛情從試穿開始』魔塑W弦試穿體驗，您的兌換碼是「"+validatornum+"」，請憑此碼依預約時間及店櫃試穿。";
+
+                    const msg1 = utf8.encode(org_msg1);
                     //預約前一天發送簡訊
-                    const date = moment2(moment2(date2).subtract(1,'days')).format("YYYYMMDD");
-                    console.log(date);
-                    req("http://api.message.net.tw/send.php?id=0905273575&password=C27198500&tel="+phone+";&mtype=G&encoding=utf8&msg=" + msg, function (error, response, body) {
+                    const date = moment2(moment2(date2).subtract(3,'days')).format("YYYYMMDD");
+
+                    const org_msg2 = "感謝您預約『Audrey魔塑W弦試穿體驗』，提醒您於"+date2+" "+time+"至"+storename+"報到，我們將準時為您服務。";
+                    // console.log(org_msg2);
+                    const msg2 = utf8.encode(org_msg2);
+                    // console.log(date);
+                    req("http://api.message.net.tw/send.php?id=0905273575&password=C27198500&tel="+phone+";&mtype=G&encoding=utf8&msg=" + msg1, function (error, response, body) {
                         console.log(body);
                     });
-                    req("http://api.message.net.tw/send.php?id=0905273575&password=C27198500&tel="+phone+";&mtype=G&encoding=utf8&msg=" + msg+"&sdate="+date+"110000", function (error, response, body) {
+                    req("http://api.message.net.tw/send.php?id=0905273575&password=C27198500&tel="+phone+";&mtype=G&encoding=utf8&sdate="+date+"042000&msg="+msg2, function (error, response, body) {
                         console.log(body);
                     });
                     //將此客戶狀態改為已發送

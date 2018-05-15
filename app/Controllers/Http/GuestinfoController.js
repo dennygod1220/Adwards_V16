@@ -43,6 +43,19 @@ class GuestinfoController {
   async store( { request,response,session,view } ){
     const guest_data = request.only(['store_id','date','time','guest_name','cell_phone','birthday','email','guest_invoice','guest_size'])
 
+    function getCode(n) {
+      var all = "azxcvbnmsdfghjklqwertyuiopZXCVBNMASDFGHJKLQWERTYUIOP0123456789";
+      var b = "";
+      for (var i = 0; i < n; i++) {
+       var index = Math.floor(Math.random() * 62);
+       b += all.charAt(index);
+    
+      }
+      return b;
+     };
+
+    guest_data.validator_num = getCode(5);
+    
     console.log(guest_data)
     if(guest_data.guest_size == "其他尺寸"){
       guest_data.status = "尺寸不符";

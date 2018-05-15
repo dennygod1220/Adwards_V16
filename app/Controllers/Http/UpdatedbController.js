@@ -42,10 +42,12 @@ class UpdatedbController {
                     const gu = await gestmodel.find(unaudited_guest[i].id);
                     const inv = await Awards.find(arr1[i][0].id);
                     //發送簡訊
-                    const gu_name = gu.toJSON().guest_name;
-                    const msg = utf8.encode(gu_name);
+                    const gu_name = gu.toJSON().guest_name;s
                     const phone = gu.toJSON().cell_phone;
                     const date2 = moment2(gu.toJSON().date).format("YYYYMMDD");
+                    const validatornum = gu.toJSON().validator_num;
+                    const org_msg = "奧黛莉提醒:"+gu_name;
+                    const msg = utf8.encode(gu_name);
                     //預約前一天發送簡訊
                     const date = moment2(moment2(date2).subtract(1,'days')).format("YYYYMMDD");
                     console.log(date);

@@ -45,6 +45,35 @@ td.disabled{
   background-color:red;
 }
   </style>
+  <script>
+        function IEVersion() {
+          var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+          var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器  
+          var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器  
+          var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+          if (isIE) {
+            var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+            reIE.test(userAgent);
+            var fIEVersion = parseFloat(RegExp["$1"]);
+            if (fIEVersion == 7) {
+            alert("您目前正在使用IE瀏覽器，為了更好的瀏覽品質，建議您使用chrome或是firefox開啟，謝謝"); 
+            } else if (fIEVersion == 8) {
+            alert("您目前正在使用IE瀏覽器，為了更好的瀏覽品質，建議您使用chrome或是firefox開啟，謝謝"); 
+            } else if (fIEVersion == 9) {
+            alert("您目前正在使用IE瀏覽器，為了更好的瀏覽品質，建議您使用chrome或是firefox開啟，謝謝"); 
+            } else if (fIEVersion == 10) {
+            alert("您目前正在使用IE瀏覽器，為了更好的瀏覽品質，建議您使用chrome或是firefox開啟，謝謝"); 
+            } else {
+            alert("您目前正在使用IE瀏覽器，為了更好的瀏覽品質，建議您使用chrome或是firefox開啟，謝謝"); 
+            }
+          } else if (isEdge) {
+            return 'edge'; //edge
+          } else if (isIE11) {
+            alert("您目前正在使用IE瀏覽器，為了更好的瀏覽品質，建議您使用chrome或是firefox開啟，謝謝"); 
+          } 
+        }
+        IEVersion()
+  </script>
 </head>
 
 <body>

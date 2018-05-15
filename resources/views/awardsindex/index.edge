@@ -78,8 +78,8 @@ $(window).resize(function () {
       <div class="card" id="formbody2">
         <div class="card-body" id="formbody">
           <div class="form-group">
-            <label><span class="isneedicon">*</span>您的發票號碼:一張520元以上的發票號碼只能預約一次</label>
-            <input type="text" name="invoice_num" class="form-control" placeholder="EX:DR89736950">
+            <label><span class="isneedicon">*</span>您的發票號碼 : <small style="color:#6c757d">(一張520元以上的發票號碼只能預約一次)</small></label>
+            <input type="text" name="invoice_num" class="form-control" placeholder="輸入範例:AB89736950">
             @if(hasErrorFor('invoice_num'))
             <small class="form-text text-danger">{{getErrorFor('invoice_num')}}</small>
             @endif

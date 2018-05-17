@@ -25,12 +25,13 @@ class GuestinfoController {
     //取得store_area並用sql 直接去除重複丟到前端去
     const store_area_distinct = await Database.select('store_area').from('store_infos').distinct('store_area')
     //取得目前各店櫃預約的狀況，每天的每個時段只能有一組客人
-    const store_status = await Database.select('store_id','date','time').from('guestinfos').where('status','已發送').andWhere('status','未審核')
+    const store_status = await Database.select('store_id','date','time').from('guestinfos').where('status','已發送').orWhere('status','未審核').orWhere('status','不符合')
+    // console.log(store_status)
+    
     //格式化日期，不然用DBbulider查出來的日期會被轉成nodejs的格式
     for(let i=0;i<store_status.length;i++){
       store_status[i].date = moment2(store_status[i].date).format("YYYY-MM-DD");
     }
-
     return view.render('guestinfo.guestinfo', {
       invoicenum: invoicenum,
       restructur_storeinfo:restructur_storeinfo,

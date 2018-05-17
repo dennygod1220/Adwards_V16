@@ -51,9 +51,14 @@ $(function () {
         // console.log(store_status_arr[0].id,store_status_arr[0].date,store_status_arr[0].time);
         // console.log(gueststoreid, guestdate, guesttime)
         var key2 = 0;
+        const store_len = $("#invisible_store_status_date").children().length;
+        console.log(store_status_arr)
         for (var i = 0; i < store_len; i++) {
+        console.log("time:"+guesttime+",date:"+guestdate+",storeid:"+gueststoreid)
+    
             if (store_status_arr[i].id == gueststoreid && store_status_arr[i].date == guestdate && store_status_arr[i].time == guesttime) {
                 key2++;
+                
             }
         }
         if (key2 >= 1) {

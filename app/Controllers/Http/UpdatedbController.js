@@ -23,7 +23,7 @@ class UpdatedbController {
     }
     async start({params}) {
         console.log("開始")
-        var j = schedule.scheduleJob('0 30 * * * *', async function () {
+        var j = schedule.scheduleJob('0 20 * * * *', async function () {
             console.log("batch running==========================================")
             //取得所有店櫃時間
             // var store_IdDateTime = await Database.select('id','')
